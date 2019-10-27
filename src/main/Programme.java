@@ -9,19 +9,18 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Programme {
     private static String regexPositionTondeuse = "[0-9]+\\s[0-9]+\\s+[A-Z]{1}";
     private static String regexEspace = "\\s+";
     private static String regexInstructions = "[A-Z]+";
     private static String regexTaillePelouse = "[0-9]+\\s[0-9]+";
-
-    private static Pattern pattern;
-    private static Matcher matcher;
 
     public static void main(String[] args) {
         File file = new File(args[0]);
@@ -30,9 +29,9 @@ public class Programme {
     }
 
     public static String lireFichier(File file){
-        List<String> lignes = null;
-        try {
-            lignes = Files.lines(Paths.get(file.getPath()))
+        List<String> lignes = new ArrayList<>();
+        try (Stream<String> input = Files.lines(Paths.get(file.getPath())))  {
+            lignes = input
                     .collect(Collectors.toList());
         } catch (IOException e) {
             System.out.println("Erreur durant la lecture du fichier");
@@ -42,14 +41,14 @@ public class Programme {
 
     private static String interpreteLines(List<String> lignes) {
         //premiere ligne coin superieur droit de la pelouse
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         String taillesPelouse = lignes.get(0);
-        pattern = Pattern.compile(regexTaillePelouse);
-        matcher = pattern.matcher(taillesPelouse);
+        Pattern pattern = Pattern.compile(regexTaillePelouse);
+        Matcher matcher = pattern.matcher(taillesPelouse);
         if(matcher.matches()) {
             String[] taillePelouse = taillesPelouse.split(regexEspace);
-            int dimensionPelouseX = Integer.valueOf(taillePelouse[0]);
-            int dimensionPelouseY = Integer.valueOf(taillePelouse[1]);
+            int dimensionPelouseX = Integer.parseInt(taillePelouse[0]);
+            int dimensionPelouseY = Integer.parseInt(taillePelouse[1]);
             Tondeuse tondeuse = null;
             //coordonées des tondeuses et instructions de deplacement
             for (int i = 1; i < lignes.size(); i += 2) {
@@ -58,7 +57,7 @@ public class Programme {
                 matcher = pattern.matcher(lignes.get(i));
                 if (matcher.matches()) {
                     String[] coordonnesTondeuse = lignes.get(i).split(regexEspace);
-                    tondeuse = new Tondeuse(new Position(Integer.valueOf(coordonnesTondeuse[0]), Integer.valueOf(coordonnesTondeuse[1])), Direction.valueOf(coordonnesTondeuse[2]));
+                    tondeuse = new Tondeuse(new Position(Integer.parseInt(coordonnesTondeuse[0]), Integer.parseInt(coordonnesTondeuse[1])), Direction.valueOf(coordonnesTondeuse[2]));
                     //la ligne d'apres contient les instructions
                     String instructions = lignes.get(i + 1);
                     pattern = Pattern.compile(regexInstructions);

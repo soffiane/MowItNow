@@ -6,14 +6,14 @@ public enum Direction {
     W("EAST"),
     S("WEST");
 
-    private String direction = "";
+    private String name = "";
 
     Direction(String name){
-        this.direction = direction;
+        this.name = name;
     }
 
     @Override
     public String toString(){
-        return direction;
+        return name;
     }
 }
