@@ -31,23 +31,23 @@ public class Tondeuse {
     public void deplacer(int dimensionPelouseX, int dimensionPelouseY) {
         switch (this.getOrientation()) {
             case E:
-                if (estUnDeplacementPossible(this.getPosition().getX() + 1, this.getPosition().getY(), dimensionPelouseX, dimensionPelouseY)) {
-                    this.getPosition().setX(this.getPosition().getX() + 1);
+                if (estUnDeplacementPossible(this.getPosition().getAbscisse() + 1, this.getPosition().getOrdonnee(), dimensionPelouseX, dimensionPelouseY)) {
+                    this.getPosition().setAbscisse(this.getPosition().getAbscisse() + 1);
                 }
                 break;
             case S:
-                if (estUnDeplacementPossible(this.getPosition().getX(), this.getPosition().getY() - 1, dimensionPelouseX, dimensionPelouseY)) {
-                    this.getPosition().setY(this.getPosition().getY() - 1);
+                if (estUnDeplacementPossible(this.getPosition().getAbscisse(), this.getPosition().getOrdonnee() - 1, dimensionPelouseX, dimensionPelouseY)) {
+                    this.getPosition().setOrdonnee(this.getPosition().getOrdonnee() - 1);
                 }
                 break;
             case W:
-                if (estUnDeplacementPossible(this.getPosition().getX() - 1, this.getPosition().getY(), dimensionPelouseX, dimensionPelouseY)) {
-                    this.getPosition().setX(this.getPosition().getX() - 1);
+                if (estUnDeplacementPossible(this.getPosition().getAbscisse() - 1, this.getPosition().getOrdonnee(), dimensionPelouseX, dimensionPelouseY)) {
+                    this.getPosition().setAbscisse(this.getPosition().getAbscisse() - 1);
                 }
                 break;
             case N:
-                if (estUnDeplacementPossible(this.getPosition().getX(), this.getPosition().getY() + 1, dimensionPelouseX, dimensionPelouseY)) {
-                    this.getPosition().setY(this.getPosition().getY() + 1);
+                if (estUnDeplacementPossible(this.getPosition().getAbscisse(), this.getPosition().getOrdonnee() + 1, dimensionPelouseX, dimensionPelouseY)) {
+                    this.getPosition().setOrdonnee(this.getPosition().getOrdonnee() + 1);
                 }
                 break;
             default:
@@ -67,19 +67,19 @@ public class Tondeuse {
         tourner(N, E, S, W);
     }
 
-    private void tourner(Direction s, Direction w, Direction n, Direction e) {
+    private void tourner(Direction direction1, Direction direction2, Direction direction3, Direction direction4) {
         switch (this.getOrientation()) {
             case E:
-                this.setOrientation(s);
+                this.setOrientation(direction1);
                 break;
             case S:
-                this.setOrientation(w);
+                this.setOrientation(direction2);
                 break;
             case W:
-                this.setOrientation(n);
+                this.setOrientation(direction3);
                 break;
             case N:
-                this.setOrientation(e);
+                this.setOrientation(direction4);
                 break;
             default:
         }
