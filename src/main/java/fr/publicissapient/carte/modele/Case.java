@@ -8,9 +8,7 @@ public class Case {
 	private int posY;
 	private Tondeuse tondeuse;
 
-	public Case(int posX, int posY) {
-		this.posX = posX;
-		this.posY = posY;
+	public Case() {
 	}
 
 	public int getPosX() {

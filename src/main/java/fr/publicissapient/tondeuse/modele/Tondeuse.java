@@ -35,4 +35,11 @@ public class Tondeuse {
     }
 
 
+    public List<Deplacement> getDeplacements() {
+        return deplacements;
+    }
+
+    public void setDeplacements(List<Deplacement> deplacements) {
+        this.deplacements = deplacements;
+    }
 }
