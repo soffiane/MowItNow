@@ -4,34 +4,39 @@ import fr.publicissapient.tondeuse.modele.Tondeuse;
 
 public class Case {
 
-	private int posX;
-	private int posY;
-	private Tondeuse tondeuse;
+    private int posX;
+    private int posY;
+    private Tondeuse tondeuse;
 
-	public Case() {
-	}
+    public Case() {
+    }
 
-	public int getPosX() {
-		return posX;
-	}
+    public Case(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
+    }
 
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
+    public int getPosX() {
+        return posX;
+    }
 
-	public int getPosY() {
-		return posY;
-	}
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
 
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
+    public int getPosY() {
+        return posY;
+    }
 
-	public Tondeuse getTondeuse() {
-		return tondeuse;
-	}
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
 
-	public void setTondeuse(Tondeuse tondeuse) {
-		this.tondeuse = tondeuse;
-	}
+    public Tondeuse getTondeuse() {
+        return tondeuse;
+    }
+
+    public void setTondeuse(Tondeuse tondeuse) {
+        this.tondeuse = tondeuse;
+    }
 }

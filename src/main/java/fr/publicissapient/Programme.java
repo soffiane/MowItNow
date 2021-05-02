@@ -13,7 +13,12 @@ import org.apache.commons.cli.ParseException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,11 +27,10 @@ public class Programme {
     private static final Logger logger = Logger.getLogger(Programme.class.getName());
 
     public static void main(String[] args) throws ParseException {
-        //String fileName = CliManager.getFileNameFromCommandLine(args);
-        File file = new File(args[0]);
+        String fileName = CliManager.getFileNameFromCommandLine(args);
         List<String> lignes = null;
         try {
-            lignes = FileReader.lireFichier(file);
+            lignes = FileReader.lireFichier(fileName);
         } catch (FileNotFoundException e) {
             logger.log(Level.SEVERE, e.getMessage());
         }

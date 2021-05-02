@@ -2,9 +2,9 @@ package fr.publicissapient.direction.modele;
 
 public enum Direction {
     N("NORTH"),
-    E("SOUTH"),
-    W("EAST"),
-    S("WEST");
+    S("SOUTH"),
+    E("EAST"),
+    W("WEST");
 
     private String name = "";
 

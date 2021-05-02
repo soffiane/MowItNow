@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static fr.publicissapient.direction.modele.Direction.*;
+import static fr.publicissapient.utils.Constantes.SPLIT_ON;
 
 public class TondeuseService {
 
@@ -57,7 +58,7 @@ public class TondeuseService {
         StringBuilder result = new StringBuilder();
         for (Tondeuse tondeuse : tondeuses) {
             tondeuse.getDeplacements().forEach(deplacement -> resoudreDeplacement(tondeuse, deplacement, carte));
-            result.append(tondeuse.getPosition().getAbscisse()).append(tondeuse.getPosition().getOrdonnee()).append(System.lineSeparator());
+            result.append(tondeuse.getPosition().getAbscisse()).append(SPLIT_ON).append(tondeuse.getPosition().getOrdonnee()).append(SPLIT_ON).append(tondeuse.getOrientation().name()).append(System.lineSeparator());
         }
         return result.toString();
     }
@@ -93,6 +94,7 @@ public class TondeuseService {
                 tondeuse.setOrientation(W);
                 break;
             default:
+                throw new InvalidDeplacementException("deplacement invalide");
         }
     }
 
@@ -111,6 +113,7 @@ public class TondeuseService {
                 tondeuse.setOrientation(E);
                 break;
             default:
+                throw new InvalidDeplacementException("deplacement invalide");
         }
     }
 
@@ -119,25 +122,17 @@ public class TondeuseService {
         if (carteService.estDansLimitesCarte(carte, nouvellePosition)) {
             Case caseEnCours = carte[tondeuse.getPosition().getOrdonnee()][tondeuse.getPosition().getAbscisse()];
             Case nouvelleCase = carte[nouvellePosition.getOrdonnee()][nouvellePosition.getAbscisse()];
-
             if (carteService.estCaseAccessible(nouvelleCase)) {
                 caseEnCours.setTondeuse(null);
                 tondeuse.setPosition(nouvellePosition);
                 nouvelleCase.setTondeuse(tondeuse);
-                System.out.println("La tondeuse vient d'avancer d'une case.");
-            } else {
-                System.out.println("La tondeuse souhaite avancer sur une position non accessible. Ce déplacement est ignoré.");
             }
-        } else {
-            System.out.println("Le déplacement n'est pas possible. Déplacement ignoré");
         }
-
     }
 
     private Position calculerNouvellePosition(Tondeuse tondeuse) {
         Position nouvellePosition = new Position();
         Position positionTondeuse = tondeuse.getPosition();
-        ;
         switch (tondeuse.getOrientation()) {
             case N:
                 nouvellePosition.setOrdonnee(positionTondeuse.getOrdonnee() + 1);

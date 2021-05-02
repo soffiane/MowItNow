@@ -33,7 +33,4 @@ public class CliManager {
         }
     }
 
-    public static String getArgumentValue(CommandLine commandLine, String argName) {
-        return commandLine.getOptionValue(argName);
-    }
 }

@@ -11,7 +11,18 @@ public class CarteService {
 
     public Case[][] construireCarte(List<String> lignes) {
         String[] split = lignes.get(0).split(SPLIT_ON);
-        return new Case[Integer.parseInt(split[0])][Integer.parseInt(split[1])];
+        Position limiteCarte = new Position(Integer.parseInt(split[0]),Integer.parseInt(split[1]));
+        Case[][] carte = new Case[limiteCarte.getAbscisse()][limiteCarte.getOrdonnee()];
+        remplirCarte(carte,limiteCarte);
+        return carte;
+    }
+
+    private void remplirCarte(Case[][] carte, Position limiteCarte) {
+        for (int i = 0; i < limiteCarte.getOrdonnee(); i++) {
+            for (int j = 0; j < limiteCarte.getAbscisse(); j++) {
+                carte[i][j] = new Case(i, j);
+            }
+        }
     }
 
     public boolean estCaseAccessible(Case caseDepart) {
@@ -28,7 +39,7 @@ public class CarteService {
         );
     }
 
-    private Position calculerTailleCarte(Case[][] carte) {
+    public Position calculerTailleCarte(Case[][] carte) {
         Position position = new Position();
         position.setOrdonnee(carte.length);
         position.setAbscisse(carte[0].length);
