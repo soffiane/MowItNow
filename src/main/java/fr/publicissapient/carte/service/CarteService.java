@@ -11,7 +11,8 @@ public class CarteService {
 
     public Case[][] construireCarte(List<String> lignes) {
         String[] split = lignes.get(0).split(SPLIT_ON);
-        Position limiteCarte = new Position(Integer.parseInt(split[0]),Integer.parseInt(split[1]));
+        //Carte 5 5 donc 6
+        Position limiteCarte = new Position(Integer.parseInt(split[0]) + 1,Integer.parseInt(split[1]) + 1);
         Case[][] carte = new Case[limiteCarte.getAbscisse()][limiteCarte.getOrdonnee()];
         remplirCarte(carte,limiteCarte);
         return carte;

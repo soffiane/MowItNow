@@ -36,8 +36,11 @@ public class Programme {
         }
         CarteService carteService = new CarteService();
         TondeuseService tondeuseService = new TondeuseService(new PositionService(), new DirectionService(), new DeplacementService(), carteService);
+        //TODO - separer classe Parsing et traitement metiers DeplacementService -> FileParser
         Case[][] carte = carteService.construireCarte(lignes);
         List<Tondeuse> tondeuses = tondeuseService.recupererListeTondeuses(lignes);
+        //TODO - mettre dans la carteService
+        //TODO - mettre methodes metier dans classes metiers - Pas de POJO convention Bean
         tondeuseService.placerTondeusesSurCarte(carte, tondeuses);
         System.out.println(tondeuseService.jouerDeplacementsTondeuses(carte, tondeuses));
     }
